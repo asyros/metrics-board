@@ -1,0 +1,1 @@
+Full-stack metrics dashboard (React + TypeScript + NestJS + Postgres + AWS)
