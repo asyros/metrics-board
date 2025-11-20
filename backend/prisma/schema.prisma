@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  createdAt DateTime  @default(now())
+
+  metrics   Metric[]
+}
+
+model Metric {
+  id          String           @id @default(uuid())
+  user        User             @relation(fields: [userId], references: [id])
+  userId      String
+  name        String
+  unit        String
+  category    String?
+  description String?
+  createdAt   DateTime         @default(now())
+
+  dataPoints  MetricDataPoint[]
+}
+
+model MetricDataPoint {
+  id         String   @id @default(uuid())
+  metric     Metric   @relation(fields: [metricId], references: [id])
+  metricId   String
+  value      Float
+  recordedAt DateTime @default(now())
+  note       String?
+}
