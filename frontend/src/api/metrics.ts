@@ -65,3 +65,7 @@ export async function addDataPoint(
     token
   );
 }
+
+export async function fetchInsights(token: string, id: string) {
+  return apiFetch<{ summary: string }>(`/metrics/${id}/insights`, {}, token);
+}

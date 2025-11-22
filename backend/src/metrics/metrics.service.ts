@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { AiService } from '../ai/ai.service';
 
 interface CreateMetricDto {
   name: string;
@@ -23,7 +24,10 @@ interface CreateDataPointDto {
 
 @Injectable()
 export class MetricsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private aiService: AiService,
+  ) {}
 
   async createMetric(userId: string, dto: CreateMetricDto) {
     return this.prisma.metric.create({
@@ -119,5 +123,54 @@ export class MetricsService {
       },
       orderBy: { recordedAt: 'asc' },
     });
+  }
+
+    async getInsights(userId: string, metricId: string) {
+    const metric = await this.findMetricById(userId, metricId);
+
+    const datapoints = await this.prisma.metricDataPoint.findMany({
+      where: { metricId },
+      orderBy: { recordedAt: 'asc' },
+    });
+
+    if (!datapoints.length) {
+      return { summary: 'No data points yet – add some data to see insights.' };
+    }
+
+    const values = datapoints.map(d => d.value);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const avg = values.reduce((sum, v) => sum + v, 0) / values.length;
+    const first = values[0];
+    const latest = values[values.length - 1];
+    const changeFromFirst = latest - first;
+    const trendDirection =
+      changeFromFirst > 0.01 ? 'up' : changeFromFirst < -0.01 ? 'down' : 'flat';
+
+    const payload = {
+      metric: {
+        name: metric.name,
+        unit: metric.unit,
+        category: metric.category,
+        description: metric.description,
+      },
+      stats: {
+        min,
+        max,
+        avg,
+        latest,
+        changeFromFirst,
+        trendDirection,
+        count: values.length,
+      },
+      datapoints: datapoints.slice(-50).map(d => ({
+        value: d.value,
+        recordedAt: d.recordedAt,
+      })),
+    };
+
+    const summary = await this.aiService.generateInsights(payload);
+
+    return { summary };
   }
 }

@@ -103,4 +103,11 @@ export class MetricsController {
 
     return this.metricsService.getDataPoints(userId, id, fromDate, toDate);
   }
+
+  @Get(':id/insights')
+  getInsights(@Req() req: any, @Param('id') id: string) {
+    const userId = req.user.userId;
+    return this.metricsService.getInsights(userId, id);
+  }
+
 }
