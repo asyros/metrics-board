@@ -1,9 +1,9 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './auth/authStore';
-import { LoginPage } from './pages/LoginPage';
-import { RegisterPage } from './pages/RegisterPage';
-import { DashboardPage } from './pages/DashboardPage';
-import { MetricDetailPage } from './pages/MetricDetailPage';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "./auth/authStore";
+import { LoginPage } from "./pages/LoginPage";
+import { RegisterPage } from "./pages/RegisterPage";
+import { DashboardPage } from "./pages/DashboardPage";
+import { MetricDetailPage } from "./pages/MetricDetailPage/MetricDetailPage";
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { token } = useAuth();

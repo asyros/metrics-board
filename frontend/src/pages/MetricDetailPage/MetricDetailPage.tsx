@@ -1,13 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
-import { useAuth } from "../auth/authStore";
+import { useAuth } from "../../auth/authStore";
 import {
   fetchMetricById,
   fetchDataPoints,
   addDataPoint,
   fetchInsights,
-} from "../api/metrics";
+} from "../../api/metrics";
 import {
   LineChart,
   Line,
@@ -40,7 +40,7 @@ export function MetricDetailPage() {
   } = useQuery({
     queryKey: ["insights", id],
     queryFn: () => fetchInsights(token!, id!),
-    enabled: !!points && (points?.length ?? 0) > 0, // only fetch when we have data
+    enabled: !!points && (points?.length ?? 0) > 0,
   });
 
   const [form, setForm] = useState({
@@ -149,7 +149,6 @@ export function MetricDetailPage() {
           )}
         </div>
 
-        {/* Add Data Point */}
         <section className="bg-slate-900/70 border border-slate-800 rounded-2xl p-5 mb-8">
           <h2 className="text-lg font-medium mb-4">Add Data Point</h2>
 
