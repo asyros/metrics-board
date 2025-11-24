@@ -1,0 +1,1 @@
+export { MetricDetailPage } from "./MetricDetailPage";

@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { apiFetch } from '../api/client';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { apiFetch } from "../../api/client";
 
 export function RegisterPage() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('test@example.com');
-  const [password, setPassword] = useState('password123');
+  const [email, setEmail] = useState("test@example.com");
+  const [password, setPassword] = useState("password123");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -14,20 +14,20 @@ export function RegisterPage() {
     setError(null);
     setLoading(true);
     try {
-      await apiFetch('/auth/register', {
-        method: 'POST',
+      await apiFetch("/auth/register", {
+        method: "POST",
         body: JSON.stringify({ email, password }),
       });
-      navigate('/login');
+      navigate("/login");
     } catch (err: any) {
-      setError(err.message ?? 'Register failed');
+      setError(err.message ?? "Register failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '40px auto' }}>
+    <div style={{ maxWidth: 400, margin: "40px auto" }}>
       <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 12 }}>
@@ -36,8 +36,8 @@ export function RegisterPage() {
             <input
               type="email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
-              style={{ display: 'block', width: '100%' }}
+              onChange={(e) => setEmail(e.target.value)}
+              style={{ display: "block", width: "100%" }}
             />
           </label>
         </div>
@@ -47,14 +47,14 @@ export function RegisterPage() {
             <input
               type="password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
-              style={{ display: 'block', width: '100%' }}
+              onChange={(e) => setPassword(e.target.value)}
+              style={{ display: "block", width: "100%" }}
             />
           </label>
         </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <button type="submit" disabled={loading}>
-          {loading ? 'Registering...' : 'Register'}
+          {loading ? "Registering..." : "Register"}
         </button>
       </form>
       <p style={{ marginTop: 16 }}>

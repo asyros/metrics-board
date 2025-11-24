@@ -2,8 +2,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./auth/authStore";
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
-import { DashboardPage } from "./pages/DashboardPage";
+import { DashboardController } from "./pages/DashboardPage";
 import { MetricDetailPage } from "./pages/MetricDetailPage/MetricDetailPage";
+import type { JSX } from "react/jsx-dev-runtime";
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { token } = useAuth();
@@ -25,7 +26,7 @@ export default function App() {
         path="/"
         element={
           <PrivateRoute>
-            <DashboardPage />
+            <DashboardController />
           </PrivateRoute>
         }
       />
