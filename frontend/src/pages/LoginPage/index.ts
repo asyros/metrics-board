@@ -1,1 +1,1 @@
-export { LoginPage } from "./LoginPage";
+export { LoginController } from "./LoginController";

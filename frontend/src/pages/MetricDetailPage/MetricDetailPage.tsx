@@ -57,7 +57,7 @@ export function MetricDetailPage() {
         note: form.note,
       }),
     onSuccess: () => {
-      queryClient.invalidateQueries(["dataPoints", id]);
+      queryClient.invalidateQueries({ queryKey: ["dataPoints", id] });
       setForm({ value: "", recordedAt: "", note: "" });
     },
   });
