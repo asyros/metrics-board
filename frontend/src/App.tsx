@@ -2,9 +2,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "./auth/authStore";
 import { RegisterPage } from "./pages/RegisterPage";
 import { DashboardController } from "./pages/DashboardPage";
-import { MetricDetailPage } from "./pages/MetricDetailPage/MetricDetailPage";
 import type { JSX } from "react/jsx-dev-runtime";
 import { LoginController } from "./pages/LoginPage";
+import { MetricDetailController } from "./pages/MetricDetailPage";
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { token } = useAuth();
@@ -34,7 +34,7 @@ export default function App() {
         path="/metrics/:id"
         element={
           <PrivateRoute>
-            <MetricDetailPage />
+            <MetricDetailController />
           </PrivateRoute>
         }
       />

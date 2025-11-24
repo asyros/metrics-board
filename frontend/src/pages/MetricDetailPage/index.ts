@@ -1,1 +1,1 @@
-export { MetricDetailPage } from "./MetricDetailPage";
+export { MetricDetailController } from "./MetricDetailController";
