@@ -1,31 +1,22 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { apiFetch } from "../../api/client";
+import { Link } from "react-router-dom";
 
-export function RegisterPage() {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("test@example.com");
-  const [password, setPassword] = useState("password123");
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-    try {
-      await apiFetch("/auth/register", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-      });
-      navigate("/login");
-    } catch (err: any) {
-      setError(err.message ?? "Register failed");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+export function RegisterPage({
+  handleSubmit,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  error,
+  loading,
+}: {
+  handleSubmit: (e: React.FormEvent) => void;
+  email: string;
+  setEmail: (email: string) => void;
+  password: string;
+  setPassword: (password: string) => void;
+  error: string | null;
+  loading: boolean;
+}) {
   return (
     <div style={{ maxWidth: 400, margin: "40px auto" }}>
       <h1>Register</h1>
