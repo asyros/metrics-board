@@ -1,5 +1,5 @@
 import type { UseMutationResult } from "@tanstack/react-query";
-import type { Metric } from "../../api/metrics";
+import type { Metric } from "../../../api/metrics";
 
 export const CreateMetric = ({
   form,

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Metric } from "../../api/metrics";
+import type { Metric } from "../../../api/metrics";
 
 export const ExistingMetrics = ({
   isLoading,

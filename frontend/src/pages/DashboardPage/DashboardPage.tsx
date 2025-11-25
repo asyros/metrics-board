@@ -1,8 +1,8 @@
 import { type UseMutationResult } from "@tanstack/react-query";
 import { type Metric } from "../../api/metrics";
-import { Header } from "./Header";
-import { ExistingMetrics } from "./ExistingMetrics";
-import { CreateMetric } from "./CreateMetric";
+import { Header } from "./components/Header";
+import { ExistingMetrics } from "./components/ExistingMetrics";
+import { CreateMetric } from "./components/CreateMetric";
 
 export function DashboardPage({
   email,

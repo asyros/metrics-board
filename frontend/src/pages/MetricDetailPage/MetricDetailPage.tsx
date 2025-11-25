@@ -1,8 +1,8 @@
-import { Header } from "./Header";
-import { Trend } from "./Trend";
-import { AddDataPoint } from "./AddDataPoint";
-import { DataPoints } from "./DataPoints";
-import { SmartInsights } from "./SmartInsights";
+import { Header } from "./components/Header";
+import { Trend } from "./components/Trend";
+import { AddDataPoint } from "./components/AddDataPoint";
+import { DataPoints } from "./components/DataPoints";
+import { SmartInsights } from "./components/SmartInsights";
 
 export function MetricDetailPage({
   metric,
